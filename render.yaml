@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: namanrestaurant
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn namanrestaurant.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: namanrestaurant.settings
+      - key: SECRET_KEY
+        generateValue: true
+      - fromDatabase:
+          name: namanrestaurant-db
+          property: connectionString
+
+databases:
+  - name: namanrestaurant-db
+    plan: free

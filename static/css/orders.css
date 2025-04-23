@@ -1,0 +1,33 @@
+/* Orders page styling */
+.orders-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.orders-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.orders-container li {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.back-btn:hover {
+    background: #0056b3;
+}

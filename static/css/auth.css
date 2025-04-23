@@ -1,0 +1,61 @@
+/* Authentication pages (login, signup) */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.auth-container {
+    width: 400px;
+    text-align: center;
+    padding: 30px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-form input {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 100%;
+}
+
+.auth-form button {
+    width: 100%;
+}
+
+.auth-link {
+    margin-top: 10px;
+    display: block;
+    text-decoration: none;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+.signup-link {
+    color: #007bff;
+}
+
+.login-link {
+    color: #28a745;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    width: 100%;
+}

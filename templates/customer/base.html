@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Food Ordering System{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {% block navbar %}
+    {% if user.is_authenticated %}
+    <div class="navbar">
+        <div>
+            <a href="{% url 'menu' %}">Home</a>
+            <a href="{% url 'orders' %}">Orders</a>
+            {% if user.is_superuser %}
+                <a href="{% url 'insights' %}">Insights</a>
+            {% endif %}
+        </div>
+        <div class="right">
+            <span>Welcome, {{ user.username }}!</span>
+            <a href="{% url 'logout' %}" class="logout"><button>Logout</button></a>
+        </div>
+    </div>
+    {% endif %}
+    {% endblock %}
+
+    <div class="main-container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

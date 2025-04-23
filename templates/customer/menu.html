@@ -1,0 +1,106 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+
+{% block title %}Food Menu{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/menu.css' %}">
+<style>
+    /* Layout Fixes */
+
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Explore Our Delicious Menu</h1>
+
+<form method="GET" class="filters">
+    <input type="text" name="search" placeholder="Search by name" value="{{ search_query }}">
+    <input type="number" name="max_price" placeholder="Max Price" value="{{ max_price }}" min="0">
+    <button type="submit" class="btn-primary">Filter</button>
+</form>
+
+<div class="container menu-container">
+    <div class="menu">
+        <h2>Food Menu</h2>
+        <div class="food-grid">
+            {% for item in food_items %}
+                <div class="food-item">
+                    <div class="food-image-container">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" alt="{{ item.name }}">
+                        {% endif %}
+                        <div class="food-description">
+                            <p>{{ item.description }}</p>
+                        </div>
+                    </div>
+                    <div class="food-name">{{ item.name }}</div>
+                    <div class="food-price">Rs.{{ item.price }}</div>
+                    
+                    <!-- Add to Cart Form -->
+                    <form method="POST" action="{% url 'add_to_cart' item.id %}">
+                        {% csrf_token %}
+                        <label>Quantity:</label>
+                        <input type="number" name="quantity" value="1" min="1">
+                        <button type="submit" class="btn-success">Add to Cart</button>
+                    </form>
+                </div>
+            {% empty %}
+                <p>No items found matching your search/filter.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="cart">
+        <h3>Your Cart</h3>
+        {% if cart_items %}
+            <ul>
+                {% for item in cart_items %}
+                <div class="cart-item">
+                    <div class="item-info">
+                        <strong>{{ item.food.name }}</strong> - Rs.{{ item.food.price }} x {{ item.quantity }}
+                    </div>
+                    <div class="item-controls">
+                        <!-- Increase Quantity Form -->
+                        <form method="POST" action="{% url 'update_cart' item.food.id 'increase' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="cart-btn increase">+</button>
+                        </form>
+
+                        <!-- Decrease Quantity Form -->
+                        <form method="POST" action="{% url 'update_cart' item.food.id 'decrease' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="cart-btn decrease">-</button>
+                        </form>
+
+                        <!-- Remove Item Form -->
+                        <form method="POST" action="{% url 'update_cart' item.food.id 'remove' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="cart-btn remove">Remove</button>
+                        </form>
+                    </div>
+                </div>
+                <br>
+                {% empty %}
+                <li>Your cart is empty.</li>
+                {% endfor %}
+            </ul>
+            <p><strong>Total:</strong> Rs. {{ total_price|floatformat:2 }}</p>
+            
+            <!-- Clear Cart Form -->
+            <form method="POST" action="{% url 'clear_cart' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-danger">Clear Cart</button>
+            </form>
+
+            <!-- Place Order Form -->
+            <form method="POST" action="{% url 'place_order' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-success">Place Order</button>
+            </form>
+        {% else %}
+            <p>Your cart is empty.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
