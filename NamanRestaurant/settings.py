@@ -34,6 +34,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['.onrender.com']
 
+LOGIN_URL = '/customer/login/'
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
