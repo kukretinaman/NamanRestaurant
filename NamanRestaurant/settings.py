@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-u4_ddlqba3j#w%m9p-oy804+)eboh9v9ri)1h!536u!5xiu)sz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com']
+ALLOWED_HOSTS = ['.onrender.com', '127.0.0.1']
 
 LOGIN_URL = '/customer/login/'
 
