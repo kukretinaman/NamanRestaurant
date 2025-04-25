@@ -16,8 +16,6 @@ This Restaurant Management Web App offers a modern and intuitive solution for re
 - **Django** – Web framework
 - **SQLite3** – Lightweight database
 - **HTML/CSS** – Frontend design
-- **Bootstrap** – UI styling
-- **JavaScript** – Dynamic client-side features
 
 ---
 
@@ -28,6 +26,7 @@ This Restaurant Management Web App offers a modern and intuitive solution for re
 - 🛒 Add items to cart
 - ✅ Place orders
 - 📦 Track placed orders
+- ❌ No access to admin panel and insights page
 
 ### Admin Side:
 - 🔐 Admin login
@@ -103,7 +102,11 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Now visit: `http://127.0.0.1:8000/` in your browser
+Now visit: `http://127.0.0.1:8000/` in your browser and login through admin credentials or generate your own credentials using Signup button.
+
+Admin Credentials:
+- Username: owner
+- Password: owner@123
 
 ---
 
