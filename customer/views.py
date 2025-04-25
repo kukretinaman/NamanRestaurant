@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.core.cache import cache
 from django.urls import reverse_lazy
 from django.db.models import Q
+from django.core.paginator import Paginator
 from .models import FoodItem, Order, OrderItem
 
 
@@ -72,14 +73,27 @@ class MenuView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         search_query = self.request.GET.get("search", "").strip()
         max_price = self.request.GET.get("max_price", "").strip()
+        veg_filter = self.request.GET.get("veg")
+        page_number = self.request.GET.get("page")
 
         filters = Q()
         if search_query:
             filters &= Q(name__icontains=search_query) | Q(description__icontains=search_query)
         if max_price:
-            filters &= Q(price__lte=float(max_price))
+            try:
+                filters &= Q(price__lte=float(max_price))
+            except ValueError:
+                pass  # Ignore if max_price is invalid
 
-        context["food_items"] = FoodItem.objects.filter(filters)
+        if veg_filter == "veg":
+            filters &= Q(is_veg=True)
+        elif veg_filter == "nonveg":
+            filters &= Q(is_veg=False)
+        food_items = FoodItem.objects.filter(filters)
+
+        # Apply pagination
+        paginator = Paginator(food_items, 2)
+        page_obj = paginator.get_page(page_number)
 
         # Cart Retrieval
         cart = cache.get(f"cart_{self.request.user.id}", {})
@@ -94,10 +108,12 @@ class MenuView(LoginRequiredMixin, TemplateView):
                 pass
 
         context.update({
+            "page_obj": page_obj,
             "cart_items": cart_items,
             "total_price": total_price,
             "search_query": search_query,
             "max_price": max_price,
+            "veg_filter": veg_filter,
         })
         return context
 
@@ -109,7 +125,7 @@ class AddToCartView(LoginRequiredMixin, View):
         cart = cache.get(f"cart_{request.user.id}", {})
         cart[str(food_id)] = cart.get(str(food_id), 0) + quantity
         cache.set(f"cart_{request.user.id}", cart, timeout=86400)
-        return redirect("menu")
+        return redirect(request.META.get('HTTP_REFERER', 'menu'))
 
 class UpdateCartView(LoginRequiredMixin, View):
     def post(self, request, food_id, action):
@@ -127,13 +143,12 @@ class UpdateCartView(LoginRequiredMixin, View):
                 del cart[str(food_id)]
 
         cache.set(f"cart_{request.user.id}", cart, timeout=86400)
-        return redirect("menu")
+        return redirect(request.META.get('HTTP_REFERER', 'menu'))
 
 class ClearCartView(LoginRequiredMixin, View):
     def post(self, request):
         cache.delete(f"cart_{request.user.id}")
-        return redirect("menu")
-
+        return redirect(request.META.get('HTTP_REFERER', 'menu'))
 
 # Order Placement View
 class PlaceOrderView(LoginRequiredMixin, View):
@@ -141,7 +156,7 @@ class PlaceOrderView(LoginRequiredMixin, View):
         cart = cache.get(f"cart_{request.user.id}", {})
         if not cart:
             messages.error(request, "Your cart is empty.")
-            return redirect("menu")
+            return redirect(request.META.get('HTTP_REFERER', 'menu'))
 
         total_price = sum(FoodItem.objects.get(id=item_id).price * quantity for item_id, quantity in cart.items())
         order = Order.objects.create(customer=request.user, total_price=total_price)

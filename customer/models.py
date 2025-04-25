@@ -14,7 +14,8 @@ class FoodItem(models.Model):
         validators=[MinValueValidator(0.01)]  #price is above 0
     )
     image = models.ImageField(upload_to="food_images/", blank=True, null=True)
-
+    is_veg = models.BooleanField(default=True)
+    
     def __str__(self):
         return str(self.name)
     

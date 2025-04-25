@@ -17,6 +17,11 @@
 <form method="GET" class="filters">
     <input type="text" name="search" placeholder="Search by name" value="{{ search_query }}">
     <input type="number" name="max_price" placeholder="Max Price" value="{{ max_price }}" min="0">
+     <select name="veg">
+        <option value="" {% if not veg_filter %}selected{% endif %}>All</option>
+        <option value="veg" {% if veg_filter == "veg" %}selected{% endif %}>Vegetarian</option>
+        <option value="nonveg" {% if veg_filter == "nonveg" %}selected{% endif %}>Non-Vegetarian</option>
+    </select>
     <button type="submit" class="btn-primary">Filter</button>
 </form>
 
@@ -24,7 +29,7 @@
     <div class="menu">
         <h2>Food Menu</h2>
         <div class="food-grid">
-            {% for item in food_items %}
+            {% for item in page_obj %}
                 <div class="food-item">
                     <div class="food-image-container">
                         {% if item.image %}
@@ -42,6 +47,12 @@
                         {% csrf_token %}
                         <label>Quantity:</label>
                         <input type="number" name="quantity" value="1" min="1">
+
+                        <input type="hidden" name="search" value="{{ search_query }}">
+                        <input type="hidden" name="max_price" value="{{ max_price }}">
+                        <input type="hidden" name="veg" value="{{ veg_filter }}">
+                        <input type="hidden" name="page" value="{{ page_obj.number }}">
+                        
                         <button type="submit" class="btn-success">Add to Cart</button>
                     </form>
                 </div>
@@ -102,5 +113,17 @@
             <p>Your cart is empty.</p>
         {% endif %}
     </div>
+</div>
+
+<div class="pagination">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}&search={{ search_query }}&max_price={{ max_price }}&veg={{ veg_filter }}">Previous</a>
+    {% endif %}
+
+    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}&search={{ search_query }}&max_price={{ max_price }}&veg={{ veg_filter }}">Next</a>
+    {% endif %}
 </div>
 {% endblock %}
