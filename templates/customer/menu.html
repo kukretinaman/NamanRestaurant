@@ -17,7 +17,7 @@
 <form method="GET" class="filters">
     <input type="text" name="search" placeholder="Search by name" value="{{ search_query }}">
     <input type="number" name="max_price" placeholder="Max Price" value="{{ max_price }}" min="0">
-     <select name="veg">
+     <select name="veg" style="height: 34px">
         <option value="" {% if not veg_filter %}selected{% endif %}>All</option>
         <option value="veg" {% if veg_filter == "veg" %}selected{% endif %}>Vegetarian</option>
         <option value="nonveg" {% if veg_filter == "nonveg" %}selected{% endif %}>Non-Vegetarian</option>
@@ -27,7 +27,7 @@
 
 <div class="container menu-container">
     <div class="menu">
-        <h2>Food Menu</h2>
+        <h2 style="justify-content: center; display: flex;">Food Menu</h2>
         <div class="food-grid">
             {% for item in page_obj %}
                 <div class="food-item">
@@ -43,7 +43,7 @@
                     <div class="food-price">Rs.{{ item.price }}</div>
                     
                     <!-- Add to Cart Form -->
-                    <form method="POST" action="{% url 'add_to_cart' item.id %}">
+                    <form method="POST" action="{% url 'add_to_cart' item.id %}" style="gap: 5px; display: flex; flex-direction: column;">
                         {% csrf_token %}
                         <label>Quantity:</label>
                         <input type="number" name="quantity" value="1" min="1">
@@ -62,14 +62,14 @@
         </div>
     </div>
 
-    <div class="cart">
+    <div class="cart" style="gap: 5px">
         <h3>Your Cart</h3>
         {% if cart_items %}
-            <ul>
+            {% comment %} <ul> {% endcomment %}
                 {% for item in cart_items %}
                 <div class="cart-item">
-                    <div class="item-info">
-                        <strong>{{ item.food.name }}</strong> - Rs.{{ item.food.price }} x {{ item.quantity }}
+                    <div class="item-info" style='display: flex; flex-direction: column; gap: 5px;'>
+                        <strong>{{ item.food.name }}</strong>  Rs.{{ item.food.price }} x {{ item.quantity }}
                     </div>
                     <div class="item-controls">
                         <!-- Increase Quantity Form -->
@@ -95,19 +95,19 @@
                 {% empty %}
                 <li>Your cart is empty.</li>
                 {% endfor %}
-            </ul>
+            {% comment %} </ul> {% endcomment %}
             <p><strong>Total:</strong> Rs. {{ total_price|floatformat:2 }}</p>
             
             <!-- Clear Cart Form -->
             <form method="POST" action="{% url 'clear_cart' %}">
                 {% csrf_token %}
-                <button type="submit" class="btn-danger">Clear Cart</button>
+                <button type="submit" style="font-weight: 700;" class="btn-danger">Clear Cart</button>
             </form>
 
             <!-- Place Order Form -->
             <form method="POST" action="{% url 'place_order' %}">
                 {% csrf_token %}
-                <button type="submit" class="btn-success">Place Order</button>
+                <button type="submit" style="font-weight: 700;" class="btn-success">Place Order</button>
             </form>
         {% else %}
             <p>Your cart is empty.</p>
