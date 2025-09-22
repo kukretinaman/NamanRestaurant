@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block title %}Respond to Feedback{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="fw-bold mb-0">Respond to Feedback</h2>
+                <a href="{% url 'feedback_management' feedback.restaurant.id %}" class="btn btn-outline-secondary">Back to Feedback</a>
+            </div>
+
+            <!-- Original Feedback -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-0 fw-bold">{{ feedback.user.username }}</h6>
+                            <small class="text-muted">{{ feedback.get_feedback_type_display }}</small>
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-{% if feedback.response %}success{% else %}warning{% endif %}">
+                                {% if feedback.response %}Previously Responded{% else %}Pending Response{% endif %}
+                            </span>
+                            <br>
+                            <small class="text-muted">{{ feedback.created_at|date:"M d, Y" }}</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ feedback.message }}</p>
+                    <small class="text-muted">
+                        Submitted on {{ feedback.created_at|date:"F d, Y \a\t g:i A" }}
+                    </small>
+                </div>
+            </div>
+
+            <!-- Response Form -->
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0 fw-bold">
+                        <i class="bi bi-reply"></i> 
+                        {% if feedback.response %}Update Response{% else %}Send Response{% endif %}
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Your Response</label>
+                            {{ form.response }}
+                            {% if form.response.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.response.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'feedback_management' feedback.restaurant.id %}" class="btn btn-outline-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-send"></i> 
+                                {% if feedback.response %}Update Response{% else %}Send Response{% endif %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Previous Response (if exists) -->
+            {% if feedback.response %}
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0 fw-bold text-success">
+                        <i class="bi bi-check-circle"></i> Current Response
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <p class="mb-1">{{ feedback.response }}</p>
+                    <small class="text-muted">
+                        Responded on {{ feedback.responded_at|date:"F d, Y \a\t g:i A" }}
+                    </small>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+.card {
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-1px);
+}
+
+.badge {
+    font-size: 0.75rem;
+}
+</style>
+{% endblock %}
+

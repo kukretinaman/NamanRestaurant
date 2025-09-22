@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Edit Restaurant{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h4 class="fw-bold mb-3">Edit Restaurant</h4>
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input class="form-control" name="name" value="{{ restaurant.name }}" required>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Description</label>
+            <textarea class="form-control" name="description">{{ restaurant.description }}</textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Photo</label>
+            <input class="form-control" type="file" name="photo">
+            {% if restaurant.photo %}
+              <img src="{{ restaurant.photo.url }}" class="img-thumbnail mt-2" width="150">
+            {% endif %}
+          </div>
+          <button class="btn btn-success">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

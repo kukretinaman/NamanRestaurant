@@ -1,0 +1,476 @@
+{% extends 'base.html' %}
+{% block title %}My Profile{% endblock %}
+
+{% block extra_css %}
+<style>
+  .profile-container {
+    background: #f5f7fb;
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+  .profile-card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    background: white;
+  }
+  .profile-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+  .nav-tabs {
+    border-bottom: 2px solid #e9ecef;
+    margin-bottom: 2rem;
+  }
+  .nav-tabs .nav-link {
+    border: none;
+    border-radius: 0.75rem 0.75rem 0 0;
+    margin-right: 0.5rem;
+    background: #919293;
+    color: #494c50;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+  }
+  .nav-tabs .nav-link.active {
+    background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+  }
+  .nav-tabs .nav-link.active:hover {
+    background: linear-gradient(135deg, #0d6efd, #0b5ed7) !important;
+    color: white !important;
+    border: none;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+  }
+  .nav-tabs .nav-link:hover:not(.active) {
+    background: #919293 !important;
+    transform: translateY(-2px);
+  }
+  .form-control:disabled {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    color: #6c757d;
+  }
+  .favorite-restaurant-item {
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  .favorite-restaurant-item:hover {
+    background: #f8f9fa;
+    border-color: #0d6efd;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.15);
+  }
+  .favorite-restaurant-item input[type="checkbox"] {
+    transform: scale(1.3);
+    margin-right: 1rem;
+    accent-color: #0d6efd;
+  }
+  .search-favorites {
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+  .search-favorites input {
+    padding-right: 3rem;
+    border-radius: 0.75rem;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+  }
+  .search-favorites input:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+  }
+  .search-favorites .search-icon {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+    font-size: 1.1rem;
+  }
+  .toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1055;
+  }
+  .toast {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+  }
+  .toast-header {
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+  .btn-close {
+    filter: invert(1);
+  }
+  .section-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem 0.75rem 0 0;
+    margin: 0;
+    font-weight: 700;
+  }
+  .table-responsive {
+    border-radius: 0 0 0.75rem 0.75rem;
+    overflow: hidden;
+  }
+  .table thead th {
+    background: #495057;
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 1rem;
+  }
+  .table tbody tr {
+    transition: all 0.2s ease;
+  }
+  .table tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+  .badge-status {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  .badge-pending {
+    background: linear-gradient(45deg, #ffc107, #ff8c00);
+    color: #212529;
+  }
+  .badge-completed {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+  }
+  .badge-cancelled {
+    background: linear-gradient(45deg, #dc3545, #e74c3c);
+    color: white;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+  <div class="container">
+    <h1 class="fw-bold mb-4 text-primary">
+      <i class="bi bi-person-circle me-2"></i>My Profile
+    </h1>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs mb-4" id="profileTabs" role="tablist">
+      <li class="nav-item">
+        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#general" type="button">
+          <i class="bi bi-person me-1"></i>General
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#orders" type="button">
+          <i class="bi bi-bag me-1"></i>Orders
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#myFeedback" type="button">
+          <i class="bi bi-chat-dots me-1"></i>My Feedback
+        </button>
+      </li>
+      {% if not user.restaurants.all %}
+      <li class="nav-item">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#register" type="button">
+          <i class="bi bi-shop me-1"></i>Register Restaurant
+        </button>
+      </li>
+      {% endif %}
+    </ul>
+
+    <div class="tab-content">
+      <!-- General Info -->
+      <div class="tab-pane fade show active" id="general">
+        <div class="profile-card">
+          <div class="section-header">
+            <h5 class="mb-0">
+              <i class="bi bi-person-gear me-2"></i>Profile Information
+            </h5>
+          </div>
+          <div class="card-body p-4">
+            <form method="post">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Full Name</label>
+                    <input type="text" name="first_name" class="form-control" value="{{ request.user.first_name }}">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Email</label>
+                    <input type="email" name="email" class="form-control" value="{{ request.user.email }}">
+                  </div>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Phone</label>
+                    <input type="text" name="phone" class="form-control" value="{{ request.user.profile.phone }}">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Diet Preference</label>
+                    {{ form.diet_preference }}
+                  </div>
+                </div>
+              </div>
+              
+              <div class="mb-3">
+                <label class="form-label fw-semibold">Cuisine Preference</label>
+                {{ form.cuisine_preference }}
+              </div>
+              
+              <div class="mb-4">
+                <label class="form-label fw-semibold">Favorite Restaurants</label>
+                <div class="search-favorites mb-3">
+                  <input type="text" class="form-control" id="searchFavorites" placeholder="Search favorite restaurants...">
+                  <i class="bi bi-search search-icon"></i>
+                </div>
+                <div class="favorite-restaurants-list" style="max-height: 300px; overflow-y: auto;">
+                  {% for restaurant in all_restaurants %}
+                  <div class="favorite-restaurant-item" data-name="{{ restaurant.name|lower }}">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" name="favorite_restaurants" 
+                             value="{{ restaurant.id }}" id="restaurant_{{ restaurant.id }}"
+                             {% if restaurant in user.profile.favorite_restaurants.all %}checked{% endif %}>
+                      <label class="form-check-label w-100" for="restaurant_{{ restaurant.id }}">
+                        <div class="d-flex justify-content-between align-items-center">
+                          <div>
+                            <strong>{{ restaurant.name }}</strong>
+                            <br>
+                            <small class="text-muted">{{ restaurant.cuisine }} • {{ restaurant.location }}</small>
+                          </div>
+                          <div class="text-end">
+                            <div class="text-success fw-semibold">₹{{ restaurant.avg_price|default:"—" }}</div>
+                            {% if restaurant.avg_rating %}
+                            <div class="text-warning">
+                              {% for i in "12345" %}
+                                {% if forloop.counter <= restaurant.avg_rating %}★{% else %}☆{% endif %}
+                              {% endfor %}
+                              <small class="text-muted">({{ restaurant.review_count }})</small>
+                            </div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+              
+              <div class="d-flex gap-2">
+                <button class="btn btn-primary" type="submit">
+                  <i class="bi bi-check-circle me-1"></i>Save Profile
+                </button>
+                <a href="{% url 'password_change' %}" class="btn btn-outline-secondary">
+                  <i class="bi bi-key me-1"></i>Change Password
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orders -->
+      <div class="tab-pane fade" id="orders">
+        <div class="profile-card">
+          <div class="section-header">
+            <h5 class="mb-0">
+              <i class="bi bi-bag me-2"></i>Order History
+            </h5>
+          </div>
+          <div class="p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Restaurant</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order in orders %}
+                    <tr>
+                      <td><strong class="text-primary">#{{ order.id }}</strong></td>
+                      <td class="fw-semibold">{{ order.restaurant.name }}</td>
+                      <td class="text-success fw-bold fs-5">₹{{ order.total_price|floatformat:2 }}</td>
+                      <td>
+                        {% if order.status == 'Pending' %}
+                          <span class="badge badge-status badge-pending">{{ order.status }}</span>
+                        {% elif order.status == 'Completed' %}
+                          <span class="badge badge-status badge-completed">{{ order.status }}</span>
+                        {% elif order.status == 'Cancelled' %}
+                          <span class="badge badge-status badge-cancelled">{{ order.status }}</span>
+                        {% else %}
+                          <span class="badge badge-status bg-secondary">{{ order.status }}</span>
+                        {% endif %}
+                      </td>
+                      <td class="text-muted">{{ order.created_at|date:"M d, Y H:i" }}</td>
+                      <td>
+                        <a href="{% url 'orders' %}" class="btn btn-sm btn-outline-primary">
+                          <i class="bi bi-eye me-1"></i>View Details
+                        </a>
+                      </td>
+                    </tr>
+                  {% empty %}
+                    <tr>
+                      <td colspan="6" class="text-center text-muted py-5">
+                        <i class="bi bi-bag-x fs-1 d-block mb-3 text-muted"></i>
+                        <h5 class="text-muted">No orders found</h5>
+                        <p class="text-muted">You haven't placed any orders yet.</p>
+                      </td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- My Feedback -->
+      <div class="tab-pane fade" id="myFeedback">
+        <div class="profile-card">
+          <div class="section-header">
+            <h5 class="mb-0">
+              <i class="bi bi-chat-dots me-2"></i>My Feedback
+            </h5>
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <p class="text-muted mb-0">Share your experience and help us improve</p>
+              <a href="{% url 'customer_feedback' %}" class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-eye me-1"></i>View All
+              </a>
+            </div>
+            {% if feedbacks %}
+            <div class="list-group">
+              {% for fb in feedbacks %}
+              <div class="list-group-item">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <h6 class="mb-0 text-primary">{{ fb.restaurant.name }}</h6>
+                      <div>
+                        <span class="badge bg-{{ fb.feedback_type|default:'secondary' }} me-2">
+                          {{ fb.get_feedback_type_display }}
+                        </span>
+                        <small class="text-muted">{{ fb.created_at|date:"M d, Y" }}</small>
+                      </div>
+                    </div>
+                    <p class="mb-2">{{ fb.message|truncatewords:30 }}</p>
+                    {% if fb.response %}
+                      <div class="alert alert-success py-2 mb-0">
+                        <small class="fw-semibold">Response:</small> {{ fb.response }}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            {% else %}
+              <div class="text-center py-4">
+                <i class="bi bi-chat-square-text fs-1 text-muted mb-3"></i>
+                <p class="text-muted">No feedback yet. Share your experience!</p>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Register Restaurant -->
+      {% if not user.restaurants.all %}
+      <div class="tab-pane fade" id="register">
+        <div class="profile-card">
+          <div class="section-header">
+            <h5 class="mb-0">
+              <i class="bi bi-shop me-2"></i>Register Your Restaurant
+            </h5>
+          </div>
+          <div class="card-body p-4">
+            <p class="text-muted mb-4">Join our platform and start serving delicious food to customers!</p>
+            <a href="{% url 'register_restaurant' %}" class="btn btn-success btn-lg">
+              <i class="bi bi-plus-circle me-2"></i>Register Restaurant
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container">
+  {% if messages %}
+    {% for message in messages %}
+    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        <strong class="me-auto">Success</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        {{ message }}
+      </div>
+    </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<script>
+// Search functionality for favorite restaurants
+document.getElementById('searchFavorites').addEventListener('input', function() {
+  const searchTerm = this.value.toLowerCase();
+  const restaurantItems = document.querySelectorAll('.favorite-restaurant-item');
+  
+  restaurantItems.forEach(item => {
+    const restaurantName = item.getAttribute('data-name');
+    if (restaurantName.includes(searchTerm)) {
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+});
+
+// Auto-dismiss toasts
+document.addEventListener('DOMContentLoaded', function() {
+  const toasts = document.querySelectorAll('.toast');
+  toasts.forEach(toast => {
+    setTimeout(() => {
+      const bsToast = new bootstrap.Toast(toast);
+      bsToast.hide();
+    }, 5000);
+  });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% block title %}Add Food Item - {{ restaurant.name }}{% endblock %}
+
+{% block extra_css %}
+<style>
+  .add-item-container {
+    background: #f5f7fb;
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+  .add-item-card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: white;
+  }
+  .section-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem 0.75rem 0 0;
+    margin: 0;
+    font-weight: 700;
+  }
+  .form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+  }
+  .btn-action {
+    border-radius: 0.5rem;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+  }
+  .btn-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="add-item-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="add-item-card">
+          <div class="section-header">
+            <h5 class="mb-0">
+              <i class="bi bi-plus-circle me-2"></i>Add New Food Item
+            </h5>
+          </div>
+          <div class="card-body p-4">
+            <div class="mb-4">
+              <h6 class="text-muted">Restaurant: <strong class="text-primary">{{ restaurant.name }}</strong></h6>
+            </div>
+            
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row g-4">
+                <div class="col-md-8">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Item Name</label>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                      <div class="text-danger small">{{ form.name.errors.0 }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Description</label>
+                    {{ form.description }}
+                    {% if form.description.errors %}
+                      <div class="text-danger small">{{ form.description.errors.0 }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label class="form-label fw-semibold">Price (₹)</label>
+                        {{ form.price }}
+                        {% if form.price.errors %}
+                          <div class="text-danger small">{{ form.price.errors.0 }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label class="form-label fw-semibold">Food Type</label>
+                        {{ form.is_veg }}
+                        {% if form.is_veg.errors %}
+                          <div class="text-danger small">{{ form.is_veg.errors.0 }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label class="form-label fw-semibold">Deal Price (₹)</label>
+                        {{ form.deal_price }}
+                        <div class="form-text">Optional: Set a special deal price</div>
+                        {% if form.deal_price.errors %}
+                          <div class="text-danger small">{{ form.deal_price.errors.0 }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label class="form-label fw-semibold">Deal Active</label>
+                        {{ form.deal_active }}
+                        <div class="form-text">Check if deal is currently active</div>
+                        {% if form.deal_active.errors %}
+                          <div class="text-danger small">{{ form.deal_active.errors.0 }}</div>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Special Item</label>
+                    {{ form.is_special }}
+                    <div class="form-text">Mark as special item for highlighting</div>
+                    {% if form.is_special.errors %}
+                      <div class="text-danger small">{{ form.is_special.errors.0 }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+                
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Item Image</label>
+                    {{ form.image }}
+                    <div class="form-text">Upload a high-quality image of the food item</div>
+                    {% if form.image.errors %}
+                      <div class="text-danger small">{{ form.image.errors.0 }}</div>
+                    {% endif %}
+                  </div>
+                  
+                  <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Tips for better visibility:</strong>
+                    <ul class="mb-0 mt-2 small">
+                      <li>Use high-quality, well-lit photos</li>
+                      <li>Show the item from an appealing angle</li>
+                      <li>Ensure the image is clear and focused</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="d-flex gap-2 mt-4">
+                <button type="submit" class="btn btn-primary btn-action">
+                  <i class="bi bi-check-circle me-1"></i>Add Item
+                </button>
+                <a href="{% url 'owner_dashboard' restaurant.id %}" class="btn btn-outline-secondary btn-action">
+                  <i class="bi bi-arrow-left me-1"></i>Back to Dashboard
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

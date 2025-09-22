@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #1a1a1a;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.navbar {
+    background: #2a2a2a;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.brand-icon {
+    font-size: 24px;
+    color: #ff652f;
+}
+
+.brand-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ff652f;
+}
+
+.nav-links {
+    display: flex;
+    gap: 24px;
+}
+
+.nav-links a {
+    color: #cccccc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #ff652f;
+}
+
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: #cccccc;
+}
+
+.logout-btn {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.logout-btn:hover {
+    background: #cc3333;
+}
+
+.messages {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.message {
+    background: #2a2a2a;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    border-left: 4px solid #ff652f;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.message-error {
+    border-left-color: #ff4444;
+}
+
+.message-success {
+    border-left-color: #44ff44;
+}
+
+.message-warning {
+    border-left-color: #ffaa00;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .nav-links {
+        order: 2;
+    }
+    
+    .nav-user {
+        order: 3;
+        flex-direction: column;
+        gap: 8px;
+    }
+}

@@ -1,0 +1,660 @@
+{% extends 'base.html' %}
+{% block title %}Owner Dashboard — {{ restaurant.name }}{% endblock %}
+
+{% block extra_css %}
+<style>
+  .dashboard-container {
+    background: #f5f7fb;
+    min-height: 100vh;
+    padding: 2rem 0;
+  }
+  .restaurant-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  }
+  .restaurant-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .restaurant-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+  }
+  .nav-tabs {
+    border-bottom: 2px solid #e9ecef;
+    margin-bottom: 2rem;
+  }
+  .nav-tabs .nav-link {
+    border: none;
+    border-radius: 0.75rem 0.75rem 0 0;
+    margin-right: 0.5rem;
+    background: #919293;
+    color: #212529;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.3s ease;
+  }
+  .nav-tabs .nav-link.active {
+    background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+  }
+  .nav-tabs .nav-link.active:hover {
+    background: linear-gradient(135deg, #0d6efd, #0b5ed7) !important;
+    color: white !important;
+    border: none;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.3);
+  }
+  .nav-tabs .nav-link:hover:not(.active) {
+    background: #919293 !important;
+    transform: translateY(-2px);
+  }
+  .dashboard-card {
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    background: white;
+  }
+  .dashboard-card:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+  .section-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem 0.75rem 0 0;
+    margin: 0;
+    font-weight: 700;
+  }
+  .stats-card {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+  }
+  .stats-card.warning {
+    background: linear-gradient(135deg, #ffc107, #ff8c00);
+    color: #212529;
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+  }
+  .stats-card.danger {
+    background: linear-gradient(135deg, #dc3545, #e74c3c);
+    color: white;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+  }
+  .stats-card.info {
+    background: linear-gradient(135deg, #17a2b8, #20c997);
+    color: white;
+    box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
+  }
+  .stats-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .stats-label {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+  .table-responsive {
+    border-radius: 0 0 0.75rem 0.75rem;
+    overflow: hidden;
+  }
+  .table thead th {
+    background: #495057;
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 1rem;
+  }
+  .table tbody tr {
+    transition: all 0.2s ease;
+  }
+  .table tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+  .badge-status {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+  .badge-pending {
+    background: linear-gradient(45deg, #ffc107, #ff8c00);
+    color: #212529;
+  }
+  .badge-completed {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+  }
+  .badge-cancelled {
+    background: linear-gradient(45deg, #dc3545, #e74c3c);
+    color: white;
+  }
+  .btn-action {
+    border-radius: 0.5rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+  }
+  .btn-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+  <div class="container">
+    <!-- Restaurant Header -->
+    <div class="restaurant-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h1 class="restaurant-title">{{ restaurant.name }}</h1>
+          <p class="restaurant-subtitle mb-0">Manage menu, orders & insights</p>
+        </div>
+        <div>
+          <a href="{% url 'menu' restaurant.id %}" class="btn btn-light me-2">
+            <i class="bi bi-eye me-1"></i>Open Menu
+          </a>
+          <a href="{% url 'restaurant_list' %}" class="btn btn-outline-light">
+            <i class="bi bi-shop me-1"></i>All Restaurants
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" id="dashTabs" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile">
+          <i class="bi bi-person-gear me-1"></i>Profile
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#menuTab">
+          <i class="bi bi-menu-button-wide me-1"></i>Menu
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#ordersTab">
+          <i class="bi bi-bag me-1"></i>Orders
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#insightsTab">
+          <i class="bi bi-graph-up me-1"></i>Insights
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#feedbackTab">
+          <i class="bi bi-chat-dots me-1"></i>Feedback
+        </button>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <!-- Profile -->
+      <div class="tab-pane fade show active" id="profile">
+        <div class="dashboard-card">
+          <div class="section-header">
+            <h5 class="mb-0">
+              <i class="bi bi-building me-2"></i>Restaurant Profile
+            </h5>
+          </div>
+          <div class="card-body p-4">
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <input type="hidden" name="update_profile" value="1">
+              <div class="row g-4">
+                <div class="col-md-8">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Restaurant Name</label>
+                    <input class="form-control" name="name" value="{{ restaurant.name }}" required>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Description</label>
+                    <textarea class="form-control" name="description" rows="3" required>{{ restaurant.description }}</textarea>
+                  </div>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label class="form-label fw-semibold">Cuisine</label>
+                        <input class="form-control" name="cuisine" value="{{ restaurant.cuisine }}" placeholder="e.g., Italian, Chinese, Indian">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label class="form-label fw-semibold">Location</label>
+                        <input class="form-control" name="location" value="{{ restaurant.location }}" placeholder="e.g., Downtown, Uptown">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label class="form-label fw-semibold">Average Price (₹)</label>
+                        <input type="number" step="0.01" class="form-control" name="avg_price" value="{{ restaurant.avg_price }}">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="mb-3">
+                        <label class="form-label fw-semibold">Phone</label>
+                        <input class="form-control" name="phone" value="{{ restaurant.phone }}" placeholder="Restaurant contact number">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label class="form-label fw-semibold">Cover Photo</label>
+                    {% if restaurant.photo %}
+                      <div class="mb-3">
+                        <img src="{{ restaurant.photo.url }}" alt="{{ restaurant.name }}" class="img-fluid rounded" style="max-height: 200px; width: 100%; object-fit: cover;">
+                      </div>
+                    {% endif %}
+                    <input type="file" class="form-control" name="photo" accept="image/*">
+                    <div class="form-text">Upload a high-quality image of your restaurant</div>
+                  </div>
+                </div>
+              </div>
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary btn-action">
+                  <i class="bi bi-check-circle me-1"></i>Update Profile
+                </button>
+                <a href="{% url 'menu' restaurant.id %}" class="btn btn-outline-secondary btn-action">
+                  <i class="bi bi-eye me-1"></i>Preview Menu
+                </a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menu -->
+      <div class="tab-pane fade" id="menuTab">
+        <div class="dashboard-card">
+          <div class="section-header">
+            <h5 class="mb-0">
+              <i class="bi bi-menu-button-wide me-2"></i>Menu Management
+            </h5>
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h6 class="mb-0">Manage your menu items</h6>
+              <a href="{% url 'add_food_item' restaurant.id %}" class="btn btn-success btn-action">
+                <i class="bi bi-plus-circle me-1"></i>Add Item
+              </a>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Type</th>
+                    <th>Special</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in menu_items %}
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        {% if item.image %}
+                          <img src="{{ item.image.url }}" alt="{{ item.name }}" class="me-3" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">
+                        {% else %}
+                          <div class="me-3 bg-light d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; border-radius: 8px;">
+                            <i class="bi bi-image text-muted"></i>
+                          </div>
+                        {% endif %}
+                        <div>
+                          <div class="fw-semibold">{{ item.name }}</div>
+                          <small class="text-muted">{{ item.description|truncatechars:50 }}</small>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="fw-bold text-success">₹{{ item.price|floatformat:2 }}</td>
+                    <td>
+                      <span class="badge {% if item.is_veg %}badge-veg{% else %}badge-nonveg{% endif %}">
+                        {% if item.is_veg %}🟢 Veg{% else %}🔴 Non-Veg{% endif %}
+                      </span>
+                    </td>
+                    <td>
+                      {% if item.is_special %}
+                        <span class="badge badge-special">⭐ Special</span>
+                      {% else %}
+                        <span class="text-muted">—</span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <a href="{% url 'edit_food_item' item.id %}" class="btn btn-sm btn-outline-primary">
+                          <i class="bi bi-pencil"></i>
+                        </a>
+                        <a href="{% url 'delete_food_item' item.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure?')">
+                          <i class="bi bi-trash"></i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="5" class="text-center text-muted py-5">
+                      <i class="bi bi-menu-button-wide fs-1 d-block mb-3"></i>
+                      <h5 class="text-muted">No menu items</h5>
+                      <p class="text-muted">Start by adding your first menu item.</p>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orders -->
+      <div class="tab-pane fade" id="ordersTab">
+        <div class="dashboard-card">
+          <div class="section-header">
+            <h5 class="mb-0">
+              <i class="bi bi-bag me-2"></i>Order Management
+            </h5>
+          </div>
+          <div class="p-0">
+            <div class="table-responsive">
+              <table class="table table-hover mb-0">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Items</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order in orders %}
+                  <tr>
+                    <td><strong class="text-primary">#{{ order.id }}</strong></td>
+                    <td class="fw-semibold">{{ order.customer.username }}</td>
+                    <td>
+                      {% for item in order.orderitem_set.all %}
+                        <div class="small">{{ item.food_item.name }} x{{ item.quantity }}</div>
+                      {% endfor %}
+                    </td>
+                    <td class="fw-bold text-success">₹{{ order.total_price|floatformat:2 }}</td>
+                    <td>
+                      {% if order.status == 'Pending' %}
+                        <span class="badge badge-status badge-pending">{{ order.status }}</span>
+                      {% elif order.status == 'Completed' %}
+                        <span class="badge badge-status badge-completed">{{ order.status }}</span>
+                      {% elif order.status == 'Cancelled' %}
+                        <span class="badge badge-status badge-cancelled">{{ order.status }}</span>
+                      {% else %}
+                        <span class="badge badge-status bg-secondary">{{ order.status }}</span>
+                      {% endif %}
+                    </td>
+                    <td class="text-muted">{{ order.created_at|date:"M d, Y H:i" }}</td>
+                    <td>
+                      <form method="post" action="{% url 'update_order_status' order.id %}" class="d-inline">
+                        {% csrf_token %}
+                        <select name="status" class="form-select form-select-sm status-select" data-current="{{ order.status }}">
+                          <option value="Pending" {% if order.status == 'Pending' %}selected{% endif %}>Pending</option>
+                          <option value="Completed" {% if order.status == 'Completed' %}selected{% endif %}>Completed</option>
+                          <option value="Cancelled" {% if order.status == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-success btn-action">
+                          <i class="bi bi-check-circle me-1"></i>
+                        </button>
+                      </form>
+                    </td>
+                    <!-- <td>
+                      {% if order.status == 'Pending' %}
+                        <form method="post" class="d-inline">
+                          {% csrf_token %}
+                          <input type="hidden" name="order_id" value="{{ order.id }}">
+                          <input type="hidden" name="status" value="Completed">
+                          <button type="submit" class="btn btn-sm btn-success btn-action">
+                            <i class="bi bi-check-circle me-1"></i>Complete
+                          </button>
+                        </form>
+                      {% endif %}
+                    </td> -->
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="7" class="text-center text-muted py-5">
+                      <i class="bi bi-bag-x fs-1 d-block mb-3"></i>
+                      <h5 class="text-muted">No orders yet</h5>
+                      <p class="text-muted">Orders will appear here when customers place them.</p>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Insights -->
+      <div class="tab-pane fade" id="insightsTab">
+        <div class="row g-4 mb-4">
+          <div class="col-md-3">
+            <div class="stats-card">
+              <div class="stats-number">₹{{ total_sales|floatformat:0 }}</div>
+              <div class="stats-label">Total Sales</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stats-card warning">
+              <div class="stats-number">{{ total_orders }}</div>
+              <div class="stats-label">Total Orders</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stats-card info">
+              <div class="stats-number">{{ total_items }}</div>
+              <div class="stats-label">Menu Items</div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="stats-card danger">
+              <div class="stats-number">{{ pending_orders }}</div>
+              <div class="stats-label">Pending Orders</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="dashboard-card">
+          <div class="section-header">
+            <h5 class="mb-0">
+              <i class="bi bi-graph-up me-2"></i>Sales Analytics
+            </h5>
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between gap-4 flex-wrap">
+              <!-- Sales Chart -->
+              <div style="flex: 1 1 30%;">
+                <h6 class="mt-2 text-center">Sales Over Time</h6>
+                {{ sales_labels|json_script:"sales-labels" }}
+                {{ sales_values|json_script:"sales-values" }}
+                <canvas id="salesChart" style="width:100%; height:300px;"></canvas>
+              </div>
+
+              <!-- Most Ordered Dishes -->
+              <div style="flex: 1 1 30%;">
+                <h6 class="mt-2 text-center">Most Ordered Dishes</h6>
+                {{ items_labels|json_script:"items-labels" }}
+                {{ items_values|json_script:"items-values" }}
+                <canvas id="itemsChart" style="width:100%; height:300px;"></canvas>
+              </div>
+
+              <!-- Top Customers -->
+              <div style="flex: 1 1 30%;">
+                <h6 class="mt-2 text-center">Top Customers</h6>
+                {{ customers_labels|json_script:"customers-labels" }}
+                {{ customers_values|json_script:"customers-values" }}
+                <canvas id="customersChart" style="width:100%; height:300px;"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+      <!-- Load Chart.js -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          const labels = JSON.parse(document.getElementById("sales-labels").textContent);
+          const values = JSON.parse(document.getElementById("sales-values").textContent);
+
+          const ctx = document.getElementById('salesChart').getContext('2d');
+          new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [{
+                label: 'Sales (₹)',
+                data: values,
+                borderColor: '#0d6efd',
+                backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                borderWidth: 2,
+                tension: 0.4,
+                fill: true,
+                pointRadius: 5,
+                pointBackgroundColor: '#0d6efd'
+              }]
+            },
+            options: {
+              responsive: true,
+              plugins: {
+                legend: { display: true }
+              },
+              scales: {
+                y: { beginAtZero: true }
+              }
+            }
+          });
+        });
+        // --- Most Ordered Items Chart ---
+        const itemsLabels = JSON.parse(document.getElementById("items-labels").textContent);
+        const itemsValues = JSON.parse(document.getElementById("items-values").textContent);
+        const itemsCtx = document.getElementById('itemsChart').getContext('2d');
+
+        new Chart(itemsCtx, {
+          type: 'bar',
+          data: {
+            labels: itemsLabels,
+            datasets: [{
+              label: 'Orders',
+              data: itemsValues,
+              backgroundColor: 'rgba(40, 167, 69, 0.7)',
+              borderColor: 'rgba(40, 167, 69, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true } }
+          }
+        });
+
+        // --- Top Customers Chart ---
+        const customersLabels = JSON.parse(document.getElementById("customers-labels").textContent);
+        const customersValues = JSON.parse(document.getElementById("customers-values").textContent);
+        const customersCtx = document.getElementById('customersChart').getContext('2d');
+
+        new Chart(customersCtx, {
+          type: 'bar',
+          data: {
+            labels: customersLabels,
+            datasets: [{
+              label: 'Orders',
+              data: customersValues,
+              backgroundColor: 'rgba(23, 162, 184, 0.7)',
+              borderColor: 'rgba(23, 162, 184, 1)',
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: { y: { beginAtZero: true } }
+          }
+        });
+      </script>
+
+
+
+      <!-- Feedback -->
+      <div class="tab-pane fade" id="feedbackTab">
+        <div class="dashboard-card">
+          <div class="section-header">
+            <h5 class="mb-0">
+              <i class="bi bi-chat-dots me-2"></i>Customer Feedback
+            </h5>
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <p class="text-muted mb-0">Manage customer feedback and responses</p>
+              <a href="{% url 'feedback_management' restaurant.id %}" class="btn btn-outline-primary btn-action">
+                <i class="bi bi-eye me-1"></i>View All
+              </a>
+            </div>
+            {% if feedbacks %}
+            <div class="list-group">
+              {% for feedback in feedbacks %}
+              <div class="list-group-item">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div class="flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <h6 class="mb-0 text-primary">{{ feedback.user.username }}</h6>
+                      <div>
+                        <span class="badge bg-{{ feedback.feedback_type|default:'secondary' }} me-2">
+                          {{ feedback.get_feedback_type_display }}
+                        </span>
+                        <small class="text-muted">{{ feedback.created_at|date:"M d, Y" }}</small>
+                      </div>
+                    </div>
+                    <p class="mb-2">{{ feedback.message|truncatewords:30 }}</p>
+                    {% if feedback.response %}
+                      <div class="alert alert-success py-2 mb-0">
+                        <small class="fw-semibold">Response:</small> {{ feedback.response }}
+                      </div>
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            {% else %}
+              <div class="text-center py-4">
+                <i class="bi bi-chat-square-text fs-1 text-muted mb-3"></i>
+                <p class="text-muted">No feedback yet. Customer feedback will appear here.</p>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

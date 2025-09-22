@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %}Register Restaurant{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">Register Your Restaurant</h4>
+        </div>
+        <div class="card-body p-4">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="row g-3">
+              <!-- Name -->
+              <div class="col-md-6">
+                <label for="{{ form.name.id_for_label }}" class="form-label">Restaurant Name</label>
+                {{ form.name }}
+              </div>
+
+              <!-- Cuisine -->
+              <div class="col-md-6">
+                <label for="{{ form.cuisine.id_for_label }}" class="form-label">Cuisine</label>
+                {{ form.cuisine }}
+              </div>
+
+              <!-- Location -->
+              <div class="col-md-6">
+                <label for="{{ form.location.id_for_label }}" class="form-label">Location</label>
+                {{ form.location }}
+              </div>
+
+              <!-- Average Price -->
+              <div class="col-md-6">
+                <label for="{{ form.avg_price.id_for_label }}" class="form-label">Average Price (₹)</label>
+                {{ form.avg_price }}
+              </div>
+
+              <!-- Description -->
+              <div class="col-12">
+                <label for="{{ form.description.id_for_label }}" class="form-label">Description</label>
+                {{ form.description }}
+              </div>
+
+              <!-- Photo -->
+              <div class="col-12">
+                <label for="{{ form.photo.id_for_label }}" class="form-label">Upload Photo</label>
+                {{ form.photo }}
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+              <a href="{% url 'restaurant_list' %}" class="btn btn-outline-secondary">Cancel</a>
+              <button type="submit" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Register
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Small tweak: Bootstrap classes for form fields -->
+<style>
+  input, select, textarea {
+    class: form-control;
+  }
+</style>
+{% endblock %}

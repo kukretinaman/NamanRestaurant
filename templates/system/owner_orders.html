@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Manage Orders - {{ restaurant.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-lg p-5" style="border-radius:1rem; background:#fff;">
+        <h2 class="text-center mb-4" style="color:#6c63ff; font-weight:700;">Manage Orders for {{ restaurant.name }}</h2>
+        {% if orders %}
+        <table class="table table-striped mb-4" style="border-radius:0.75rem; overflow:hidden;">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                    <th>Placed At</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.customer.username }}</td>
+                    <td>₹{{ order.total_price }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{{ order.created_at }}</td>
+                    <td>
+                        <a href="{% url 'update_order_status' order.id %}" class="btn-primary btn-sm">Update</a>
+                        <a href="{% url 'delete_order' order.id %}" class="btn-danger btn-sm" onclick="return confirm('Delete this order?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p class="text-center text-muted">No orders yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,251 @@
+.restaurant-page {
+    min-height: 100vh;
+    background: #1a1a1a;
+    color: #ffffff;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.brand-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.brand-icon {
+    font-size: 48px;
+    color: #ff652f;
+}
+
+.brand-name {
+    font-size: 32px;
+    font-weight: 700;
+    color: #ff652f;
+}
+
+.hero-subtitle {
+    font-size: 18px;
+    color: #cccccc;
+    margin-bottom: 40px;
+}
+
+.search-form {
+    margin-top: 32px;
+}
+
+.search-inputs {
+    display: flex;
+    gap: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.search-inputs input,
+.search-inputs select {
+    flex: 1;
+    min-width: 150px;
+    padding: 12px 16px;
+    background: #3a3a3a;
+    border: 1px solid #4a4a4a;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.search-inputs button {
+    padding: 12px 24px;
+    background: #ff652f;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.search-inputs button:hover {
+    background: #e5521a;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+.restaurant-card {
+    background: #2a2a2a;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #3a3a3a;
+}
+
+.restaurant-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.card-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholder-image {
+    width: 100%;
+    height: 100%;
+    background: #3a3a3a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+}
+
+.placeholder-icon {
+    font-size: 48px;
+    margin-bottom: 8px;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.restaurant-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+}
+
+.cuisine-tag {
+    background: #ff652f;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.restaurant-info {
+    margin-bottom: 20px;
+}
+
+.address {
+    color: #cccccc;
+    font-size: 14px;
+    margin: 0;
+}
+
+.card-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-primary, .btn-secondary {
+    flex: 1;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background: #ff652f;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #e5521a;
+    color: white;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #cccccc;
+    border: 1px solid #4a4a4a;
+}
+
+.btn-secondary:hover {
+    background: #3a3a3a;
+    color: white;
+}
+
+.loading, .no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: #cccccc;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #3a3a3a;
+    border-top: 3px solid #ff652f;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.empty-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .search-inputs {
+        flex-direction: column;
+    }
+    
+    .search-inputs input,
+    .search-inputs select,
+    .search-inputs button {
+        width: 100%;
+    }
+    
+    .restaurant-grid {
+        grid-template-columns: 1fr;
+    }
+}
