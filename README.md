@@ -1,4 +1,4 @@
-# Naman Restaurant - Food Ordering Platform
+# JustEat - Food Ordering Platform
 
 A comprehensive Django-based food ordering platform that connects customers with restaurants, featuring role-based authentication, order management, and feedback systems.
 
@@ -239,4 +239,4 @@ For support and questions:
 
 ---
 
-**Built with ❤️ using Django, Bootstrap, and modern web technologies.**
+**Built using Django, Bootstrap, and modern web technologies.**
