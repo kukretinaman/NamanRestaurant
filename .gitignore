@@ -1,5 +1,4 @@
 staticfiles/
-db.sqlite3
 DOCS/
 logs/
 *.log
