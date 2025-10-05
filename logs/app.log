@@ -5200,3 +5200,105 @@ django.template.exceptions.TemplateDoesNotExist: customer/profile.html
 [INFO] 2025-10-06 00:19:51,458 django.server | "GET /restaurants/ HTTP/1.1" 200 23755
 [INFO] 2025-10-06 00:19:55,131 django.server | "GET /profile/ HTTP/1.1" 200 34399
 [INFO] 2025-10-06 00:20:58,627 django.server | "GET /register-restaurant/ HTTP/1.1" 200 8802
+[INFO] 2025-10-06 00:54:42,549 django.server | - Broken pipe from ('127.0.0.1', 54751)
+[INFO] 2025-10-06 00:54:42,556 django.server | - Broken pipe from ('127.0.0.1', 54749)
+[INFO] 2025-10-06 00:54:42,557 django.server | - Broken pipe from ('127.0.0.1', 54750)
+[INFO] 2025-10-06 00:54:42,563 django.server | - Broken pipe from ('127.0.0.1', 54748)
+[WARNING] 2025-10-06 00:54:42,635 django.request | Not Found: /struts2-showcase/struts/utils.js
+[INFO] 2025-10-06 00:54:42,637 django.server | - Broken pipe from ('127.0.0.1', 54753)
+[WARNING] 2025-10-06 00:54:43,737 django.request | Not Found: /js/
+[WARNING] 2025-10-06 00:54:43,740 django.server | "GET /js/?${jndi:dns://MDEDiscovery292ffcf970SeenInTheWildGet-8000} HTTP/1.1" 404 8687
+[INFO] 2025-10-06 00:54:43,745 django.server | - Broken pipe from ('127.0.0.1', 54772)
+[WARNING] 2025-10-06 00:54:44,978 django.request | Not Found: /:undefined
+[WARNING] 2025-10-06 00:54:44,988 django.request | Not Found: /:undefined
+[WARNING] 2025-10-06 00:54:44,996 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:44,997 django.server | - Broken pipe from ('127.0.0.1', 54793)
+[WARNING] 2025-10-06 00:54:45,010 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:45,014 django.server | - Broken pipe from ('127.0.0.1', 54794)
+[INFO] 2025-10-06 00:54:45,017 django.server | - Broken pipe from ('127.0.0.1', 54798)
+[INFO] 2025-10-06 00:54:45,017 django.server | - Broken pipe from ('127.0.0.1', 54796)
+[INFO] 2025-10-06 00:54:45,017 django.server | - Broken pipe from ('127.0.0.1', 54799)
+[INFO] 2025-10-06 00:54:45,024 django.server | - Broken pipe from ('127.0.0.1', 54797)
+[INFO] 2025-10-06 00:54:45,027 django.server | - Broken pipe from ('127.0.0.1', 54801)
+[INFO] 2025-10-06 00:54:45,033 django.server | - Broken pipe from ('127.0.0.1', 54800)
+[WARNING] 2025-10-06 00:54:45,048 django.request | Not Found: /:undefined
+[WARNING] 2025-10-06 00:54:45,054 django.request | Not Found: /struts2-showcase/struts/tooltip.gif
+[WARNING] 2025-10-06 00:54:45,064 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:45,065 django.server | - Broken pipe from ('127.0.0.1', 54806)
+[INFO] 2025-10-06 00:54:45,066 django.server | - Broken pipe from ('127.0.0.1', 54802)
+[WARNING] 2025-10-06 00:54:45,077 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:45,079 django.server | - Broken pipe from ('127.0.0.1', 54803)
+[WARNING] 2025-10-06 00:54:45,090 django.request | Not Found: /struts2-showcase/struts/domtt.css
+[WARNING] 2025-10-06 00:54:45,104 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:45,105 django.server | - Broken pipe from ('127.0.0.1', 54808)
+[INFO] 2025-10-06 00:54:45,105 django.server | - Broken pipe from ('127.0.0.1', 54804)
+[INFO] 2025-10-06 00:54:45,110 django.server | - Broken pipe from ('127.0.0.1', 54805)
+[INFO] 2025-10-06 00:54:45,112 django.server | - Broken pipe from ('127.0.0.1', 54809)
+[INFO] 2025-10-06 00:54:45,115 django.server | - Broken pipe from ('127.0.0.1', 54807)
+[WARNING] 2025-10-06 00:54:45,125 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:45,135 django.server | - Broken pipe from ('127.0.0.1', 54815)
+[INFO] 2025-10-06 00:54:45,149 django.server | - Broken pipe from ('127.0.0.1', 54816)
+[WARNING] 2025-10-06 00:54:45,148 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:45,152 django.server | - Broken pipe from ('127.0.0.1', 54813)
+[INFO] 2025-10-06 00:54:45,154 django.server | - Broken pipe from ('127.0.0.1', 54814)
+[WARNING] 2025-10-06 00:54:45,163 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:45,169 django.server | - Broken pipe from ('127.0.0.1', 54817)
+[INFO] 2025-10-06 00:54:45,171 django.server | - Broken pipe from ('127.0.0.1', 54819)
+[WARNING] 2025-10-06 00:54:45,185 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:45,186 django.server | - Broken pipe from ('127.0.0.1', 54820)
+[INFO] 2025-10-06 00:54:45,188 django.server | - Broken pipe from ('127.0.0.1', 54818)
+[WARNING] 2025-10-06 00:54:45,774 django.request | Not Found: /api/v2/${jndi:dns://MDEDiscovery292ffcf970SeenInTheWildGet-8000}
+[INFO] 2025-10-06 00:54:45,778 django.server | - Broken pipe from ('127.0.0.1', 54825)
+[WARNING] 2025-10-06 00:54:45,787 django.request | Not Found: /api/
+[INFO] 2025-10-06 00:54:45,790 django.server | - Broken pipe from ('127.0.0.1', 54826)
+[WARNING] 2025-10-06 00:54:45,802 django.request | Not Found: /index.html
+[INFO] 2025-10-06 00:54:45,806 django.server | - Broken pipe from ('127.0.0.1', 54827)
+[WARNING] 2025-10-06 00:54:45,815 django.request | Not Found: /login
+[INFO] 2025-10-06 00:54:45,817 django.server | - Broken pipe from ('127.0.0.1', 54828)
+[INFO] 2025-10-06 00:54:45,822 django.server | - Broken pipe from ('127.0.0.1', 54829)
+[WARNING] 2025-10-06 00:54:45,834 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:45,836 django.server | - Broken pipe from ('127.0.0.1', 54830)
+[WARNING] 2025-10-06 00:54:45,861 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:45,864 django.server | - Broken pipe from ('127.0.0.1', 54833)
+[WARNING] 2025-10-06 00:54:45,876 django.request | Not Found: /login
+[WARNING] 2025-10-06 00:54:45,879 django.security.csrf | Forbidden (CSRF cookie not set.): /
+[INFO] 2025-10-06 00:54:45,880 django.server | - Broken pipe from ('127.0.0.1', 54834)
+[INFO] 2025-10-06 00:54:45,885 django.server | - Broken pipe from ('127.0.0.1', 54831)
+[INFO] 2025-10-06 00:54:45,886 django.server | - Broken pipe from ('127.0.0.1', 54835)
+[WARNING] 2025-10-06 00:54:45,899 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:45,900 django.server | - Broken pipe from ('127.0.0.1', 54836)
+[INFO] 2025-10-06 00:54:45,904 django.server | - Broken pipe from ('127.0.0.1', 54837)
+[WARNING] 2025-10-06 00:54:45,923 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:45,928 django.server | - Broken pipe from ('127.0.0.1', 54839)
+[INFO] 2025-10-06 00:54:45,929 django.server | - Broken pipe from ('127.0.0.1', 54838)
+[WARNING] 2025-10-06 00:54:45,942 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:45,949 django.server | - Broken pipe from ('127.0.0.1', 54841)
+[INFO] 2025-10-06 00:54:45,950 django.server | - Broken pipe from ('127.0.0.1', 54843)
+[WARNING] 2025-10-06 00:54:45,965 django.request | Not Found: /cgi-bin/
+[INFO] 2025-10-06 00:54:45,970 django.server | - Broken pipe from ('127.0.0.1', 54844)
+[INFO] 2025-10-06 00:54:45,971 django.server | - Broken pipe from ('127.0.0.1', 54845)
+[WARNING] 2025-10-06 00:54:45,987 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:45,991 django.server | - Broken pipe from ('127.0.0.1', 54846)
+[INFO] 2025-10-06 00:54:45,993 django.server | - Broken pipe from ('127.0.0.1', 54847)
+[WARNING] 2025-10-06 00:54:46,009 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:46,011 django.server | - Broken pipe from ('127.0.0.1', 54848)
+[INFO] 2025-10-06 00:54:46,021 django.server | - Broken pipe from ('127.0.0.1', 54849)
+[WARNING] 2025-10-06 00:54:46,035 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:46,038 django.server | - Broken pipe from ('127.0.0.1', 54850)
+[INFO] 2025-10-06 00:54:46,044 django.server | - Broken pipe from ('127.0.0.1', 54851)
+[WARNING] 2025-10-06 00:54:46,058 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:46,063 django.server | - Broken pipe from ('127.0.0.1', 54852)
+[INFO] 2025-10-06 00:54:46,065 django.server | - Broken pipe from ('127.0.0.1', 54853)
+[WARNING] 2025-10-06 00:54:46,078 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:46,080 django.server | - Broken pipe from ('127.0.0.1', 54854)
+[INFO] 2025-10-06 00:54:46,085 django.server | - Broken pipe from ('127.0.0.1', 54855)
+[WARNING] 2025-10-06 00:54:46,096 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:46,098 django.server | - Broken pipe from ('127.0.0.1', 54856)
+[INFO] 2025-10-06 00:54:46,103 django.server | - Broken pipe from ('127.0.0.1', 54857)
+[WARNING] 2025-10-06 00:54:46,114 django.request | Not Found: /:undefined
+[INFO] 2025-10-06 00:54:46,116 django.server | - Broken pipe from ('127.0.0.1', 54858)
+[INFO] 2025-10-06 00:54:46,122 django.server | - Broken pipe from ('127.0.0.1', 54859)
+[WARNING] 2025-10-06 00:54:46,135 django.request | Not Found: /cgi-bin/
+[INFO] 2025-10-06 00:54:46,136 django.server | - Broken pipe from ('127.0.0.1', 54860)
+[INFO] 2025-10-06 01:14:38,925 django.utils.autoreload | C:\Users\namankukreti\OneDrive - Nagarro\Desktop\Training\Exit_Test_Assignment\NamanRestaurant\NamanRestaurant\settings.py changed, reloading.
+[INFO] 2025-10-06 01:14:50,866 django.utils.autoreload | Watching for file changes with StatReloader
