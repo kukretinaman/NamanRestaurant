@@ -5077,3 +5077,126 @@ django.template.exceptions.TemplateDoesNotExist: customer/profile.html
 [INFO] 2025-09-22 14:55:02,419 customer.views | Owner isf_owner logged in
 [INFO] 2025-09-22 14:55:02,437 django.server | "POST / HTTP/1.1" 302 0
 [INFO] 2025-09-22 14:55:02,680 django.server | "GET /system/dashboard/2/ HTTP/1.1" 200 103552
+[INFO] 2025-10-05 23:07:46,599 django.utils.autoreload | Watching for file changes with StatReloader
+[INFO] 2025-10-05 23:07:52,348 django.server | "GET / HTTP/1.1" 200 8355
+[INFO] 2025-10-05 23:07:52,392 django.server | "GET /static/js/app.js HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:07:52,392 django.server | "GET /static/css/app.css HTTP/1.1" 304 0
+[WARNING] 2025-10-05 23:07:52,600 django.request | Not Found: /favicon.ico
+[WARNING] 2025-10-05 23:07:52,601 django.server | "GET /favicon.ico HTTP/1.1" 404 8649
+[INFO] 2025-10-05 23:08:00,442 customer.views | Restaurant list accessed by user: isf_owner
+[INFO] 2025-10-05 23:08:00,592 django.server | "GET /restaurants/ HTTP/1.1" 200 20245
+[INFO] 2025-10-05 23:08:00,616 django.server | "GET /media/restaurant_photos/bb.webp HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:08:00,617 django.server | "GET /media/restaurant_photos/ct_EBPhinI.png HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:08:00,645 django.server | "GET /media/restaurant_photos/75c66f67-0bec-41cc-84d6-6faaca787890.png HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:08:00,646 django.server | "GET /media/restaurant_photos/isf.png HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:08:00,650 django.server | "GET /media/restaurant_photos/dg.webp HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:08:00,654 django.server | "GET /media/restaurant_photos/kuro.webp HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:08:03,038 django.server | "GET /profile/ HTTP/1.1" 200 27714
+[INFO] 2025-10-05 23:08:13,643 customer.views | Restaurant list accessed by user: isf_owner
+[INFO] 2025-10-05 23:08:13,674 django.server | "GET /restaurants/ HTTP/1.1" 200 20245
+[INFO] 2025-10-05 23:08:39,338 customer.views | Restaurant list accessed by user: isf_owner
+[INFO] 2025-10-05 23:08:39,368 django.server | "GET /restaurants/ HTTP/1.1" 200 20245
+[INFO] 2025-10-05 23:08:43,469 django.server | "POST /logout/ HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:08:43,483 django.server | "GET / HTTP/1.1" 200 7442
+[INFO] 2025-10-05 23:13:04,573 django.utils.autoreload | Watching for file changes with StatReloader
+[INFO] 2025-10-05 23:17:32,713 django.utils.autoreload | Watching for file changes with StatReloader
+[INFO] 2025-10-05 23:18:47,209 django.server | "GET / HTTP/1.1" 200 7442
+[INFO] 2025-10-05 23:19:10,818 django.server | "POST / HTTP/1.1" 200 7748
+[INFO] 2025-10-05 23:19:22,850 customer.views | Customer user1 logged in
+[INFO] 2025-10-05 23:19:22,867 django.server | "POST / HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:19:22,882 customer.views | Restaurant list accessed by user: user1
+[INFO] 2025-10-05 23:19:23,030 django.server | "GET /restaurants/ HTTP/1.1" 200 25837
+[INFO] 2025-10-05 23:19:23,067 django.server | "GET /media/restaurant_photos/mug.png HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:19:33,230 django.server | "GET /profile/ HTTP/1.1" 200 49299
+[INFO] 2025-10-05 23:19:42,000 customer.views | Restaurant list accessed by user: user1
+[INFO] 2025-10-05 23:19:42,029 django.server | "GET /restaurants/ HTTP/1.1" 200 25837
+[INFO] 2025-10-05 23:19:50,016 django.server | "GET /restaurant/5/menu/ HTTP/1.1" 200 13799
+[INFO] 2025-10-05 23:19:50,047 django.server | "GET /media/food_images/biryani.png HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:19:53,564 django.server | "POST /add_to_cart/5/6/ HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:19:53,598 django.server | "GET /restaurant/5/menu/ HTTP/1.1" 200 15679
+[INFO] 2025-10-05 23:20:15,705 django.server | "GET /profile/ HTTP/1.1" 200 49299
+[INFO] 2025-10-05 23:20:44,781 django.server | "GET /orders/ HTTP/1.1" 200 23136
+[INFO] 2025-10-05 23:20:44,805 django.server | "GET /media/food_images/CaliCheese2-scaled.jpg HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:20:53,453 django.server | "GET /orders/ HTTP/1.1" 200 23136
+[INFO] 2025-10-05 23:21:01,640 django.server | "POST /orders/cancel/58/ HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:21:01,690 django.server | "GET /orders/ HTTP/1.1" 200 23047
+[INFO] 2025-10-05 23:21:05,725 django.server | "POST /orders/cancel/57/ HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:21:05,766 django.server | "GET /orders/ HTTP/1.1" 200 22670
+[INFO] 2025-10-05 23:21:09,459 django.server | "POST /orders/cancel/56/ HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:21:09,499 django.server | "GET /orders/ HTTP/1.1" 200 22293
+[INFO] 2025-10-05 23:21:13,675 django.server | "POST /orders/cancel/55/ HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:21:13,714 django.server | "GET /orders/ HTTP/1.1" 200 21916
+[INFO] 2025-10-05 23:21:21,470 customer.views | Restaurant list accessed by user: user1
+[INFO] 2025-10-05 23:21:21,494 django.server | "GET /restaurants/ HTTP/1.1" 200 25837
+[INFO] 2025-10-05 23:21:26,285 django.server | "GET /restaurant/2/menu/ HTTP/1.1" 200 22314
+[INFO] 2025-10-05 23:21:26,307 django.server | "GET /media/food_images/Best-Chocolate-Cake_exps47786._THCA1917912C10_02_1bC_RMS-2486907168.jpg HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:21:26,308 django.server | "GET /media/food_images/4d157-16722390221017-1920.webp HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:21:26,312 django.server | "GET /media/food_images/360_F_27579652_tM7V4fZBBw8RLmZo0Bi8WhtO2EosTRFD_L2JqqBO.jpg HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:21:35,455 django.server | "GET /restaurant/2/menu/?page=2&search=&max_price=&veg= HTTP/1.1" 200 17001
+[INFO] 2025-10-05 23:21:35,480 django.server | "GET /media/food_images/Chicken-Biryani-Recipe-1086809860.jpg HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:22:08,180 django.server | "GET /profile/ HTTP/1.1" 200 49315
+[INFO] 2025-10-05 23:22:22,475 customer.views | Restaurant list accessed by user: user1
+[INFO] 2025-10-05 23:22:22,500 django.server | "GET /restaurants/ HTTP/1.1" 200 25837
+[INFO] 2025-10-05 23:37:33,316 customer.views | Restaurant list accessed by user: user1
+[INFO] 2025-10-05 23:37:33,346 django.server | "GET /restaurants/?page=2 HTTP/1.1" 200 18912
+[INFO] 2025-10-05 23:37:33,361 django.server | "GET /media/restaurant_photos/rs.png HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:38:01,980 customer.views | Restaurant list accessed by user: user1
+[INFO] 2025-10-05 23:38:02,008 django.server | "GET /restaurants/?page=1 HTTP/1.1" 200 25837
+[INFO] 2025-10-05 23:40:09,464 django.server | "GET /restaurant/2/menu/ HTTP/1.1" 200 22314
+[INFO] 2025-10-05 23:41:10,474 django.server | "POST /add_to_cart/2/19/ HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:41:10,524 django.server | "GET /restaurant/2/menu/ HTTP/1.1" 200 24197
+[INFO] 2025-10-05 23:41:12,566 django.server | "POST /add_to_cart/2/2/ HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:41:12,623 django.server | "GET /restaurant/2/menu/ HTTP/1.1" 200 25429
+[INFO] 2025-10-05 23:41:14,472 django.server | "POST /cart/update/2/2/increase/ HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:41:14,527 django.server | "GET /restaurant/2/menu/ HTTP/1.1" 200 25126
+[INFO] 2025-10-05 23:41:16,523 django.server | "POST /cart/update/2/2/increase/ HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:41:16,576 django.server | "GET /restaurant/2/menu/ HTTP/1.1" 200 25126
+[INFO] 2025-10-05 23:44:59,417 django.server | "GET /orders/ HTTP/1.1" 200 21628
+[INFO] 2025-10-05 23:45:07,214 django.server | "GET /orders/?page=2 HTTP/1.1" 200 31679
+[INFO] 2025-10-05 23:45:14,736 django.server | "GET /orders/?page=3 HTTP/1.1" 200 32371
+[INFO] 2025-10-05 23:45:17,544 django.server | "GET /orders/?page=4 HTTP/1.1" 200 23803
+[INFO] 2025-10-05 23:45:17,574 django.server | "GET /media/food_images/butterchickenpizza.png HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:45:27,715 django.server | "GET /orders/?page=5 HTTP/1.1" 200 13925
+[INFO] 2025-10-05 23:45:30,425 django.server | "GET /orders/?page=4 HTTP/1.1" 200 23803
+[INFO] 2025-10-05 23:45:32,181 django.server | "GET /orders/?page=3 HTTP/1.1" 200 32371
+[INFO] 2025-10-05 23:45:33,622 django.server | "GET /orders/?page=2 HTTP/1.1" 200 31679
+[INFO] 2025-10-05 23:45:35,126 django.server | "GET /orders/?page=1 HTTP/1.1" 200 21628
+[INFO] 2025-10-05 23:46:45,229 django.server | "GET /profile/ HTTP/1.1" 200 49315
+[INFO] 2025-10-05 23:46:58,893 django.server | "GET /my-feedback/ HTTP/1.1" 200 7728
+[INFO] 2025-10-05 23:50:21,708 customer.views | Restaurant list accessed by user: user1
+[INFO] 2025-10-05 23:50:21,753 django.server | "GET /restaurants/ HTTP/1.1" 200 25837
+[INFO] 2025-10-05 23:51:08,392 django.server | "POST /logout/ HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:51:08,404 django.server | "GET / HTTP/1.1" 200 7442
+[INFO] 2025-10-05 23:51:21,603 customer.views | Owner isf_owner logged in
+[INFO] 2025-10-05 23:51:21,634 django.server | - Broken pipe from ('127.0.0.1', 64684)
+[INFO] 2025-10-05 23:51:21,838 customer.views | Owner isf_owner logged in
+[INFO] 2025-10-05 23:51:21,863 django.server | "POST / HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:51:22,294 django.server | "GET /system/dashboard/2/ HTTP/1.1" 200 101084
+[INFO] 2025-10-05 23:55:41,723 django.server | "GET /system/feedback/2/ HTTP/1.1" 200 11063
+[INFO] 2025-10-05 23:56:29,029 django.server | "GET /profile/ HTTP/1.1" 200 27714
+[INFO] 2025-10-05 23:56:32,426 django.server | "GET /orders/ HTTP/1.1" 200 11619
+[INFO] 2025-10-05 23:56:36,535 customer.views | Restaurant list accessed by user: isf_owner
+[INFO] 2025-10-05 23:56:36,562 django.server | "GET /restaurants/ HTTP/1.1" 200 20245
+[INFO] 2025-10-05 23:56:39,623 django.server | "POST /logout/ HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:56:39,634 django.server | "GET / HTTP/1.1" 200 7442
+[INFO] 2025-10-05 23:57:32,723 django.server | "GET /signup/ HTTP/1.1" 200 3379
+[INFO] 2025-10-05 23:58:30,889 django.server | "GET /admin/ HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:58:31,202 django.server | "GET /admin/login/?next=/admin/ HTTP/1.1" 200 4199
+[INFO] 2025-10-05 23:58:31,224 django.server | "GET /static/admin/css/dark_mode.css HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:58:31,224 django.server | "GET /static/admin/css/base.css HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:58:31,226 django.server | "GET /static/admin/css/nav_sidebar.css HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:58:31,233 django.server | "GET /static/admin/css/login.css HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:58:31,233 django.server | "GET /static/admin/css/responsive.css HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:58:31,234 django.server | "GET /static/admin/js/theme.js HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:58:31,239 django.server | "GET /static/admin/js/nav_sidebar.js HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:58:38,415 django.server | "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[INFO] 2025-10-05 23:58:38,555 django.server | "GET /admin/ HTTP/1.1" 200 13910
+[INFO] 2025-10-05 23:58:38,591 django.server | "GET /static/admin/css/dashboard.css HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:58:38,603 django.server | "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:58:38,603 django.server | "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 304 0
+[INFO] 2025-10-05 23:58:38,604 django.server | "GET /static/admin/img/icon-deletelink.svg HTTP/1.1" 304 0
+[INFO] 2025-10-06 00:19:49,390 django.server | "GET / HTTP/1.1" 200 7922
+[INFO] 2025-10-06 00:19:51,437 customer.views | Restaurant list accessed by user: admin
+[INFO] 2025-10-06 00:19:51,458 django.server | "GET /restaurants/ HTTP/1.1" 200 23755
+[INFO] 2025-10-06 00:19:55,131 django.server | "GET /profile/ HTTP/1.1" 200 34399
+[INFO] 2025-10-06 00:20:58,627 django.server | "GET /register-restaurant/ HTTP/1.1" 200 8802

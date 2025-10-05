@@ -1,2 +1,8 @@
 staticfiles/
 db.sqlite3
+DOCS/
+logs/
+*.log
+*.pot
+*.pyc
+__pycache__/
