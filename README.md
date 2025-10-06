@@ -93,7 +93,6 @@ Customers can browse restaurants, customize orders, and set preferences, while o
 ### 🔐 Login & Signup
 
 ![Login](screenshots/login.png)
-![Signup](screenshots/signup.png)
 
 ### 🛠️ Admin Panel
 
@@ -193,7 +192,23 @@ NamanRestaurant/
 │   ├── models.py
 │   ├── urls.py
 │   ├── forms.py
-│   └── templates/customer/
+│
+├── system/
+│   ├── views.py
+│   ├── urls.py
+│   ├── models.py
+│
+├── templates/
+│   ├── base.html
+│   ├── login.html
+│   ├── signup.html
+│   ├── home.html
+│   ├── system/
+│   │   ├── owner_dashboard.html
+│   │   ├── add_food_item.html
+│   │   ├── edit_food_item.html
+│   │   └── feedback_management.html
+│   └── customer/
 │       ├── restaurant_list.html
 │       ├── menu.html
 │       ├── cart.html
@@ -201,22 +216,6 @@ NamanRestaurant/
 │       ├── orders.html
 │       ├── password_change.html
 │       └── feedback.html
-│
-├── system/
-│   ├── views.py
-│   ├── urls.py
-│   ├── models.py
-│   └── templates/system/
-│       ├── owner_dashboard.html
-│       ├── add_food_item.html
-│       ├── edit_food_item.html
-│       └── feedback_management.html
-│
-├── templates/
-│   ├── base.html
-│   ├── login.html
-│   ├── signup.html
-│   └── home.html
 │
 ├── static/
 │   ├── css/
